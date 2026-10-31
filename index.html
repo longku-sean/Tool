@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0e14">
+  <title>龍谷 longku · 專屬連結</title>
+
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-deep: #0b0e14;
+      --bg-card: rgba(16, 24, 36, 0.78);
+      --border-mid: rgba(70, 130, 220, 0.18);
+      --text-primary: #e8edf5;
+      --text-secondary: #90b4e6;
+      --accent: #5f8ee6;
+      --accent-bright: #4a8aff;
+      --radius-card: 2.8rem;
+      --radius-pill: 3rem;
+      --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      -webkit-text-size-adjust: 100%;
+    }
+
+    body {
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      min-height: 100dvh;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans TC', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      padding: 1.5rem;
+      color: var(--text-primary);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ===== 輕量化黑洞背景 ===== */
+    .blackhole-bg {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+      background: radial-gradient(ellipse at center, #070a12 0%, #000 65%);
+      background-image:
+        radial-gradient(1.5px 1.5px at 12% 22%, rgba(200, 220, 255, 0.8), transparent),
+        radial-gradient(1px 1px at 28% 68%, rgba(180, 210, 255, 0.6), transparent),
+        radial-gradient(1.5px 1.5px at 45% 15%, rgba(220, 230, 255, 0.7), transparent),
+        radial-gradient(1px 1px at 63% 82%, rgba(180, 210, 255, 0.5), transparent),
+        radial-gradient(1.5px 1.5px at 78% 35%, rgba(200, 220, 255, 0.7), transparent),
+        radial-gradient(1px 1px at 88% 72%, rgba(180, 210, 255, 0.6), transparent),
+        radial-gradient(ellipse at center, #070a12 0%, #000 65%);
+    }
+
+    .blackhole-glow {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 120vmin;
+      height: 120vmin;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        rgba(0, 0, 0, 0) 0deg,
+        rgba(60, 120, 255, 0.30) 60deg,
+        rgba(140, 100, 255, 0.38) 130deg,
+        rgba(0, 180, 255, 0.25) 200deg,
+        rgba(80, 60, 200, 0.30) 280deg,
+        rgba(0, 0, 0, 0) 360deg
+      );
+      filter: blur(50px);
+      opacity: 0.7;
+      animation: bhSpin 40s linear infinite;
+      mask-image: radial-gradient(circle, transparent 18%, #000 32%, #000 75%, transparent 88%);
+      -webkit-mask-image: radial-gradient(circle, transparent 18%, #000 32%, #000 75%, transparent 88%);
+      will-change: transform;
+    }
+
+    @keyframes bhSpin {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to   { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .blackhole-core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 30vmin;
+      height: 30vmin;
+      margin: -15vmin 0 0 -15vmin;
+      border-radius: 50%;
+      background: #000;
+      box-shadow:
+        0 0 60px 20px rgba(60, 120, 255, 0.35),
+        0 0 120px 50px rgba(80, 60, 200, 0.22);
+    }
+
+    .blackhole-ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 38vmin;
+      height: 38vmin;
+      margin: -19vmin 0 0 -19vmin;
+      border-radius: 50%;
+      border: 1.5px solid rgba(150, 200, 255, 0.4);
+      box-shadow: 0 0 20px rgba(120, 180, 255, 0.5);
+      animation: bhSpin 25s linear infinite;
+      will-change: transform;
+    }
+
+    /* ===== 主卡片 ===== */
+    .card {
+      position: relative;
+      z-index: 2;
+      max-width: 500px;
+      width: 100%;
+      background: var(--bg-card);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+      border: 1px solid var(--border-mid);
+      border-radius: var(--radius-card);
+      padding: 3rem 2.5rem;
+      box-shadow: 0 30px 55px -12px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(60, 130, 230, 0.08) inset;
+      animation: cardIn 0.6s var(--ease-smooth) both;
+      text-align: center;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(16px) scale(0.985); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .header-title {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #d4e4ff 0%, #b8d4ff 40%, #5f92ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.5rem;
+    }
+
+    .sub-title {
+      font-size: 0.95rem;
+      color: var(--text-secondary);
+      margin-bottom: 2.5rem;
+    }
+
+    /* ===== 連結按鈕列表 ===== */
+    .link-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .link-btn {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      border-radius: var(--radius-pill);
+      text-decoration: none;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #fff;
+      background: rgba(30, 50, 80, 0.4);
+      border: 1px solid rgba(70, 130, 220, 0.2);
+      transition: all 0.3s var(--ease-spring);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .link-btn i {
+      font-size: 1.4rem;
+      width: 2rem;
+      text-align: center;
+      transition: transform 0.3s var(--ease-spring);
+    }
+
+    .link-btn:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    .link-btn:hover i {
+      transform: scale(1.15);
+    }
+
+    /* AI Tool 專屬配色 */
+    .link-btn.ai {
+      background: linear-gradient(135deg, rgba(0, 198, 255, 0.15), rgba(0, 114, 255, 0.15));
+      border-color: rgba(0, 198, 255, 0.3);
+    }
+    .link-btn.ai i { color: #00c6ff; }
+    .link-btn.ai:hover {
+      background: linear-gradient(135deg, #00c6ff, #0072ff);
+      border-color: transparent;
+      box-shadow: 0 10px 25px -5px rgba(0, 114, 255, 0.6);
+    }
+
+    /* 小遊戲 專屬配色 */
+    .link-btn.game {
+      background: linear-gradient(135deg, rgba(247, 183, 51, 0.15), rgba(252, 74, 26, 0.15));
+      border-color: rgba(247, 183, 51, 0.3);
+    }
+    .link-btn.game i { color: #f7b733; }
+    .link-btn.game:hover {
+      background: linear-gradient(135deg, #f7b733, #fc4a1a);
+      border-color: transparent;
+      box-shadow: 0 10px 25px -5px rgba(252, 74, 26, 0.6);
+    }
+
+    /* Uno game 專屬配色 */
+    .link-btn.uno {
+      background: linear-gradient(135deg, rgba(255, 65, 108, 0.15), rgba(255, 75, 43, 0.15));
+      border-color: rgba(255, 65, 108, 0.3);
+    }
+    .link-btn.uno i { color: #ff416c; }
+    .link-btn.uno:hover {
+      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+      border-color: transparent;
+      box-shadow: 0 10px 25px -5px rgba(255, 65, 108, 0.6);
+    }
+
+    /* ===== 返回按鈕 ===== */
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.3s;
+      padding: 0.5rem 1rem;
+      border-radius: var(--radius-pill);
+      background: rgba(20, 40, 80, 0.3);
+      border: 1px solid rgba(70, 130, 220, 0.1);
+    }
+
+    .back-btn:hover {
+      color: #fff;
+      background: rgba(40, 80, 160, 0.4);
+    }
+
+    /* ===== 響應式 ===== */
+    @media (max-width: 400px) {
+      .card {
+        padding: 2rem 1.5rem;
+      }
+      .header-title {
+        font-size: 1.8rem;
+      }
+      .link-btn {
+        font-size: 1rem;
+        padding: 0.9rem 1.2rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .blackhole-glow,
+      .blackhole-ring,
+      .card {
+        animation: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 背景 -->
+  <div class="blackhole-bg" aria-hidden="true">
+    <div class="blackhole-glow"></div>
+    <div class="blackhole-core"></div>
+    <div class="blackhole-ring"></div>
+  </div>
+
+  <!-- 主卡片 -->
+  <main class="card" role="main">
+    <h1 class="header-title">專屬連結</h1>
+    <p class="sub-title">龍谷 longku 的創作與工具</p>
+
+    <div class="link-list">
+      <!-- AI Tool -->
+      <a href="https://longku-sean.github.io/AI/" target="_blank" rel="noopener noreferrer" class="link-btn ai">
+        <i class="fas fa-robot" aria-hidden="true"></i>
+        AI Tool
+        <i class="fas fa-arrow-right" style="margin-left: auto; font-size: 1rem; opacity: 0.6;" aria-hidden="true"></i>
+      </a>
+
+      <!-- 小遊戲 -->
+      <a href="https://longku-sean.github.io/game-longku/" target="_blank" rel="noopener noreferrer" class="link-btn game">
+        <i class="fas fa-gamepad" aria-hidden="true"></i>
+        小遊戲
+        <i class="fas fa-arrow-right" style="margin-left: auto; font-size: 1rem; opacity: 0.6;" aria-hidden="true"></i>
+      </a>
+
+      <!-- Uno game -->
+      <a href="https://longku-sean.github.io/Uno-game/" target="_blank" rel="noopener noreferrer" class="link-btn uno">
+        <i class="fas fa-layer-group" aria-hidden="true"></i>
+        Uno game
+        <i class="fas fa-arrow-right" style="margin-left: auto; font-size: 1rem; opacity: 0.6;" aria-hidden="true"></i>
+      </a>
+    </div>
+
+    <!-- 返回首頁按鈕 -->
+    <a href="index.html" class="back-btn">
+      <i class="fas fa-arrow-left" aria-hidden="true"></i> 返回個人主頁
+    </a>
+  </main>
+
+</body>
+</html>
