@@ -259,7 +259,7 @@
       box-shadow: 0 10px 25px -5px rgba(170, 120, 255, 0.6);
     }
 
-    /* ===== 返回主頁按鈕（白色 + 底部內波浪光） ===== */
+    /* ===== 返回主頁按鈕（白色 + 底部內海浪光） ===== */
     .back-btn-wrap {
       display: inline-block;
       margin-top: 1rem;
@@ -282,18 +282,18 @@
       transition: all 0.3s var(--ease-spring);
       -webkit-tap-highlight-color: transparent;
       box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
-      overflow: hidden; /* 讓波浪光只顯示在按鈕內 */
+      overflow: hidden; /* 讓海浪光只顯示在按鈕內 */
       z-index: 1;
     }
 
-    /* 波浪光層 - 在按鈕內部底部 */
+    /* 海浪光層 - 第一層 (主海浪) */
     .back-btn::before {
       content: '';
       position: absolute;
       left: 0;
       bottom: 0;
       width: 200%;
-      height: 60%; /* 只佔按鈕高度 60%，靠底部 */
+      height: 60%;
       background: linear-gradient(
         90deg,
         #4a8aff 0%,
@@ -303,14 +303,15 @@
         #4a8aff 100%
       );
       background-size: 50% 100%;
-      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+      border-radius: 45% 55% 45% 55% / 60% 45% 55% 40%;
       opacity: 0.9;
-      animation: waveFlow 2.5s linear infinite;
+      animation: waveFlow 2.5s linear infinite, waveWobble 4s ease-in-out infinite;
       z-index: -1;
       pointer-events: none;
+      transform-origin: center bottom;
     }
 
-    /* 第二層波浪（增加層次感） */
+    /* 海浪光層 - 第二層 (副海浪，增加層次感) */
     .back-btn::after {
       content: '';
       position: absolute;
@@ -326,16 +327,24 @@
         #ff6b9d 100%
       );
       background-size: 50% 100%;
-      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+      border-radius: 55% 45% 55% 45% / 50% 55% 45% 50%;
       opacity: 0.6;
-      animation: waveFlow 3.5s linear infinite reverse;
+      animation: waveFlow 3.5s linear infinite reverse, waveWobble 5s ease-in-out infinite reverse;
       z-index: -1;
       pointer-events: none;
+      transform-origin: center bottom;
     }
 
+    /* 海浪水平流動 (左往右) */
     @keyframes waveFlow {
       0%   { background-position: 0% 0%; }
       100% { background-position: 200% 0%; }
+    }
+
+    /* 海浪上下起伏 (增加波浪感) */
+    @keyframes waveWobble {
+      0%, 100% { transform: scaleY(1) translateY(0); }
+      50%      { transform: scaleY(1.08) translateY(-2px); }
     }
 
     .back-btn i {
@@ -436,7 +445,7 @@
       </a>
     </div>
 
-    <!-- 返回首頁按鈕（白色 + 內底部波浪光） -->
+    <!-- 返回首頁按鈕（白色 + 內底部海浪光） -->
     <div class="back-btn-wrap">
       <a href="https://longku-sean.github.io/about-me/" class="back-btn">
         <i class="fas fa-arrow-left" aria-hidden="true"></i>
