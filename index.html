@@ -259,7 +259,7 @@
       box-shadow: 0 10px 25px -5px rgba(170, 120, 255, 0.6);
     }
 
-    /* ===== 返回主頁按鈕（白色 + 底部內海浪光） ===== */
+    /* ===== 返回主頁按鈕（白色 + 點點海浪） ===== */
     .back-btn-wrap {
       display: inline-block;
       margin-top: 1rem;
@@ -282,69 +282,52 @@
       transition: all 0.3s var(--ease-spring);
       -webkit-tap-highlight-color: transparent;
       box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
-      overflow: hidden; /* 讓海浪光只顯示在按鈕內 */
+      overflow: hidden;
       z-index: 1;
     }
 
-    /* 海浪光層 - 第一層 (主海浪) */
+    /* 點點海浪層 */
     .back-btn::before {
       content: '';
       position: absolute;
-      left: 0;
+      left: -50%;
       bottom: 0;
       width: 200%;
-      height: 60%;
-      background: linear-gradient(
-        90deg,
-        #4a8aff 0%,
-        #8a5cff 25%,
-        #ff6b9d 50%,
-        #8a5cff 75%,
-        #4a8aff 100%
-      );
-      background-size: 50% 100%;
-      border-radius: 45% 55% 45% 55% / 60% 45% 55% 40%;
-      opacity: 0.9;
-      animation: waveFlow 2.5s linear infinite, waveWobble 4s ease-in-out infinite;
+      height: 100%;
+      background-image: radial-gradient(circle, #4a8aff 2.5px, transparent 2.5px);
+      background-size: 12px 12px;
+      background-position: 0 0;
+      animation: dotsWave 3s linear infinite;
+      opacity: 0.8;
       z-index: -1;
       pointer-events: none;
-      transform-origin: center bottom;
+      -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 90%);
+      mask-image: linear-gradient(to top, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 90%);
     }
 
-    /* 海浪光層 - 第二層 (副海浪，增加層次感) */
+    /* 第二層點點海浪，顏色不同 */
     .back-btn::after {
       content: '';
       position: absolute;
-      left: 0;
+      left: -50%;
       bottom: 0;
       width: 200%;
-      height: 45%;
-      background: linear-gradient(
-        90deg,
-        #ff6b9d 0%,
-        #4a8aff 30%,
-        #8a5cff 60%,
-        #ff6b9d 100%
-      );
-      background-size: 50% 100%;
-      border-radius: 55% 45% 55% 45% / 50% 55% 45% 50%;
-      opacity: 0.6;
-      animation: waveFlow 3.5s linear infinite reverse, waveWobble 5s ease-in-out infinite reverse;
+      height: 100%;
+      background-image: radial-gradient(circle, #ff6b9d 2px, transparent 2px);
+      background-size: 12px 12px;
+      background-position: 6px 6px;
+      animation: dotsWave 4s linear infinite reverse;
+      opacity: 0.7;
       z-index: -1;
       pointer-events: none;
-      transform-origin: center bottom;
+      -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 80%);
+      mask-image: linear-gradient(to top, rgba(0,0,0,1) 20%, rgba(0,0,0,0) 80%);
     }
 
-    /* 海浪水平流動 (左往右) */
-    @keyframes waveFlow {
-      0%   { background-position: 0% 0%; }
-      100% { background-position: 200% 0%; }
-    }
-
-    /* 海浪上下起伏 (增加波浪感) */
-    @keyframes waveWobble {
-      0%, 100% { transform: scaleY(1) translateY(0); }
-      50%      { transform: scaleY(1.08) translateY(-2px); }
+    /* 點點流動動畫（左往右） */
+    @keyframes dotsWave {
+      0%   { background-position: 0 0; }
+      100% { background-position: 100% 0; }
     }
 
     .back-btn i {
@@ -445,7 +428,7 @@
       </a>
     </div>
 
-    <!-- 返回首頁按鈕（白色 + 內底部海浪光） -->
+    <!-- 返回首頁按鈕（白色 + 點點波浪） -->
     <div class="back-btn-wrap">
       <a href="https://longku-sean.github.io/about-me/" class="back-btn">
         <i class="fas fa-arrow-left" aria-hidden="true"></i>
