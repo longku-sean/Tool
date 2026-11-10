@@ -259,24 +259,84 @@
       box-shadow: 0 10px 25px -5px rgba(170, 120, 255, 0.6);
     }
 
-    /* ===== 返回按鈕 ===== */
+    /* ===== 返回主頁按鈕（白色按鈕 + 波浪光） ===== */
+    .back-btn-wrap {
+      position: relative;
+      display: inline-block;
+      margin-top: 1rem;
+    }
+
+    /* 波浪光層 */
+    .back-btn-wave {
+      position: absolute;
+      left: 50%;
+      bottom: -20px;
+      transform: translateX(-50%);
+      width: 180%;
+      height: 60px;
+      pointer-events: none;
+      z-index: -1;
+      filter: blur(14px);
+      opacity: 0.85;
+      background: linear-gradient(
+        90deg,
+        #4a8aff 0%,
+        #8a5cff 35%,
+        #ff6b9d 70%,
+        #4a8aff 100%
+      );
+      background-size: 200% 100%;
+      border-radius: 50%;
+      animation: waveFlow 3s linear infinite, wavePulse 2.5s ease-in-out infinite;
+    }
+
+    @keyframes waveFlow {
+      0%   { background-position: 0% 50%; }
+      100% { background-position: 200% 50%; }
+    }
+
+    @keyframes wavePulse {
+      0%, 100% { transform: translateX(-50%) scaleX(1) scaleY(0.9); opacity: 0.7; }
+      50%      { transform: translateX(-50%) scaleX(1.1) scaleY(1.2); opacity: 1; }
+    }
+
+    /* 白色返回按鈕 */
     .back-btn {
+      position: relative;
+      z-index: 2;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      font-size: 0.9rem;
-      color: var(--text-secondary);
+      justify-content: center;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #0b0e14;
       text-decoration: none;
-      transition: color 0.3s;
-      padding: 0.5rem 1rem;
+      padding: 0.75rem 1.8rem;
       border-radius: var(--radius-pill);
-      background: rgba(20, 40, 80, 0.3);
-      border: 1px solid rgba(70, 130, 220, 0.1);
+      background: #ffffff;
+      border: 2px solid #ffffff;
+      transition: all 0.3s var(--ease-spring);
+      -webkit-tap-highlight-color: transparent;
+      box-shadow: 0 6px 20px rgba(255, 255, 255, 0.25);
+    }
+
+    .back-btn i {
+      font-size: 0.9rem;
+      transition: transform 0.3s var(--ease-spring);
     }
 
     .back-btn:hover {
-      color: #fff;
-      background: rgba(40, 80, 160, 0.4);
+      transform: translateY(-2px) scale(1.03);
+      box-shadow: 0 10px 30px rgba(255, 255, 255, 0.35);
+    }
+
+    .back-btn:hover i {
+      transform: translateX(-4px);
+    }
+
+    .back-btn:active {
+      transform: translateY(0) scale(0.98);
     }
 
     /* ===== 響應式 ===== */
@@ -291,12 +351,22 @@
         font-size: 1rem;
         padding: 0.9rem 1.2rem;
       }
+      .back-btn {
+        font-size: 0.85rem;
+        padding: 0.65rem 1.5rem;
+      }
+      .back-btn-wave {
+        width: 160%;
+        height: 50px;
+        bottom: -16px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .blackhole-glow,
       .blackhole-ring,
-      .card {
+      .card,
+      .back-btn-wave {
         animation: none !important;
       }
     }
@@ -346,10 +416,13 @@
       </a>
     </div>
 
-    <!-- 返回首頁按鈕 -->
-    <a href="index.html" class="back-btn">
-      <i class="fas fa-arrow-left" aria-hidden="true"></i> 返回個人主頁
-    </a>
+    <!-- 返回首頁按鈕（白色 + 波浪光） -->
+    <div class="back-btn-wrap">
+      <div class="back-btn-wave" aria-hidden="true"></div>
+      <a href="https://longku-sean.github.io/about-me/" class="back-btn">
+        <i class="fas fa-arrow-left" aria-hidden="true"></i> 返回個人主頁
+      </a>
+    </div>
   </main>
 
 </body>
